@@ -19,7 +19,8 @@
     <ul>
       <li><a href="#">Home</a></li>
       <li><a href="#timeline">Timeline</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <!-- Changed 'Contact' to 'Newsletter' to link to the subscription form -->
+      <li><a href="#newsletter">Newsletter</a></li>
     </ul>
   </nav>
   <!-- End of Navigation Bar -->
@@ -181,7 +182,7 @@
   </section>
 
   <!-- Newsletter Subscription Form Section (now below the three columns) -->
-  <section class="container my-5">
+  <section class="container my-5" id="newsletter">
     <!-- This is a simple subscription form using Bootstrap -->
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -214,6 +215,41 @@
       <div>&copy; 2024 Intel Corporation. All rights reserved.</div>
     </div>
   </footer>
+
+<script>
+  // List of right-to-left language codes
+  const rtlLanguages = ['ar', 'he', 'fa', 'ur', 'dv', 'ps', 'syr', 'yi'];
+
+  function updateDirection() {
+    const html = document.documentElement;
+    const lang = html.lang?.toLowerCase() || 'en';
+
+    // Only update dir if needed
+    const isRtl = rtlLanguages.includes(lang);
+    const newDir = isRtl ? 'rtl' : 'ltr';
+
+    if (html.dir !== newDir) {
+      html.dir = newDir;
+      console.log(`Language: ${lang} | Direction set to: ${html.dir}`);
+    }
+  }
+
+  // Run once on page load
+  updateDirection();
+
+  // Throttle to prevent lag from rapid changes (300ms delay)
+  let updateTimeout = null;
+  const observer = new MutationObserver(() => {
+    if (updateTimeout) clearTimeout(updateTimeout);
+    updateTimeout = setTimeout(updateDirection, 300);
+  });
+
+  // Watch for lang or dir attribute changes on <html>
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['lang', 'dir']
+  });
+</script>
 
 </body>
 </html>
