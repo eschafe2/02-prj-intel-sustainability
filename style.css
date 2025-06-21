@@ -63,7 +63,7 @@ header {
 }
 
 header h1 {
-  font-size: 2.5rem;
+  font-size: 3.2rem; /* Increased font size for the main title */
   margin-top: 40px; /* Add space below the logo bar */
   margin-bottom: 15px;
 }
@@ -72,6 +72,7 @@ header p {
   font-size: 1.2rem;
   max-width: 700px;
   margin: 0 auto;
+  color: white; /* Set the header paragraph text color to white for better readability */
 }
 
 /* Timeline Section */
@@ -106,18 +107,32 @@ header p {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.6s, z-index 0.6s; /* Increased transition time for smoother animation */
   flex-shrink: 0;
+  z-index: 0; /* Default z-index for all cards */
 }
 
+/* When you hover over a card, it smoothly grows a bit larger and appears above the others */
 .timeline-event:hover {
-  transform: scale(1.05);
+  transform: scale(1.08); /* Smoothly extend the card on hover */
   background-color: #e6f4ff;
+  z-index: 10; /* Bring the hovered card above the rest */
 }
 
 .timeline-event h2 {
   color: #0071c5;
   margin-bottom: 5px;
+}
+
+/* Hide the card title and description by default, show them on hover */
+.timeline-event h3,
+.timeline-event p {
+  display: none; /* Hide by default */
+}
+
+.timeline-event:hover h3,
+.timeline-event:hover p {
+  display: block; /* Show on hover */
 }
 
 .timeline-event h3 {
